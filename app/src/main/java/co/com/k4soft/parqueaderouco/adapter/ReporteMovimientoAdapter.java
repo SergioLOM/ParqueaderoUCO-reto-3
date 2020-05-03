@@ -62,6 +62,8 @@ public class ReporteMovimientoAdapter extends BaseAdapter implements Filterable{
 
         if(listaMovimientoOut.get(position).getPagoFacturado() == 0.0){
             holder.cardViewReporteMovimiento.setCardBackgroundColor(Color.RED);
+        }else{
+            holder.cardViewReporteMovimiento.setCardBackgroundColor(Color.WHITE);
         }
         holder.txtPlaca.setText(listaMovimientoOut.get(position).getPlaca());
         holder.txtFechaIngreso.setText(listaMovimientoOut.get(position).getFechaEntrada());
