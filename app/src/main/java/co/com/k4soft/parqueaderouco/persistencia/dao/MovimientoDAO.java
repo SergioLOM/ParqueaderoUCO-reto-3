@@ -21,6 +21,7 @@ public interface MovimientoDAO {
     @Update
     void update(Movimiento movimiento);
 
-    @Query("SELECT * FROM MOVIMIENTO WHERE (fechaEntrada >= :fechaInicio AND fechaEntrada <= :fechaFinal AND (fechaSalida IS NULL OR fechaSalida <= :fechaFinal)) ORDER BY fechaEntrada ASC")
+    //@Query("SELECT * FROM MOVIMIENTO WHERE (fechaEntrada >= :fechaInicio AND fechaEntrada <= :fechaFinal AND (fechaSalida IS NULL OR fechaSalida <= :fechaFinal)) ORDER BY fechaEntrada ASC")
+    @Query("SELECT * FROM MOVIMIENTO WHERE (fechaEntrada BETWEEN :fechaInicio AND :fechaFinal) ORDER BY fechaEntrada ASC")
     List<Movimiento> findByFecha(String fechaInicio, String fechaFinal);
 }

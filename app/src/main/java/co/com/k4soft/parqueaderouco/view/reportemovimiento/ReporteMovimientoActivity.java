@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -20,6 +21,7 @@ import co.com.k4soft.parqueaderouco.R;
 import co.com.k4soft.parqueaderouco.adapter.ReporteMovimientoAdapter;
 import co.com.k4soft.parqueaderouco.entidades.Movimiento;
 import co.com.k4soft.parqueaderouco.persistencia.room.DataBaseHelper;
+import co.com.k4soft.parqueaderouco.utilities.DateUtil;
 
 public class ReporteMovimientoActivity extends AppCompatActivity {
 
@@ -59,7 +61,9 @@ public class ReporteMovimientoActivity extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                txtFechaInicio.setText(dayOfMonth + "/" + (month+1) +"/" + year);
+                String fecha = year + "-" + (month + 1) + "-" + dayOfMonth;
+                Date fechaMod = DateUtil.convertStringToDateNotHour(fecha);
+                txtFechaInicio.setText(DateUtil.convertDateToString(fechaMod));
             }
         }, anioInicio, mesInicio, diaInicio);
         datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
@@ -75,7 +79,9 @@ public class ReporteMovimientoActivity extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                txtFechaFinal.setText(dayOfMonth + "/" + (month+1) +"/" + year);
+                String fecha = year + "-" + (month + 1) + "-" + dayOfMonth;
+                Date fechaMod = DateUtil.convertStringToDateNotHour(fecha);
+                txtFechaFinal.setText(DateUtil.convertDateToString(fechaMod));
             }
         }, anioFinal , mesFinal, diaFinal);
         datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());

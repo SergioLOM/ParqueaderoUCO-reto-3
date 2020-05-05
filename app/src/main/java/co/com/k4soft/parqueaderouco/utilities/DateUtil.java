@@ -26,6 +26,17 @@ public class DateUtil {
         return date;
     }
 
+    public static Date convertStringToDateNotHour(String stringDate) {
+        Date date = null;
+        try {
+            DateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+            date = format.parse(stringDate);
+        } catch (Exception e) {
+            Log.e("error", e.toString());
+        }
+        return date;
+    }
+
 
     public static String convertDateToStringNotHour(Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT,Locale.ENGLISH);
