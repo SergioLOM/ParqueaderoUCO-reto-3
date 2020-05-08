@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -89,14 +90,22 @@ public class ReporteMovimientoActivity extends AppCompatActivity {
     }
 
 
-    public void generarReporte(View view) {
+    public void generarReporte(View view) throws ParseException {
         listaReporteMovimientos = null;
-        listaReporteMovimientos = db.getMovimientoDAO().findByFecha(txtFechaInicio.getText().toString(), txtFechaFinal.getText().toString());
-        if (listaReporteMovimientos.isEmpty()) {
-            Toast.makeText(getApplicationContext(), R.string.no_hay_registros, Toast.LENGTH_LONG).show();
-        } else {
-            reporteMovimientoAdapter = new ReporteMovimientoAdapter(this,listaReporteMovimientos);
-            listaViewMovimiento.setAdapter(reporteMovimientoAdapter);
+        listaViewMovimiento.setAdapter(null);
+        String fechaInicio = txtFechaInicio.getText().toString();
+        String fechaFinal = txtFechaFinal.getText().toString();
+        double diferenciaFechas = DateUtil.timeFromDates(fechaInicio, fechaFinal);
+        if (diferenciaFechas < 0){
+            Toast.makeText(getApplicationContext(), R.string.fecha_inicial_menor_fecha_final, Toast.LENGTH_LONG).show();
+        }else{
+            listaReporteMovimientos = db.getMovimientoDAO().findByFecha(fechaInicio, fechaFinal);
+            if (listaReporteMovimientos.isEmpty()) {
+                Toast.makeText(getApplicationContext(), R.string.no_hay_registros, Toast.LENGTH_LONG).show();
+            } else {
+                reporteMovimientoAdapter = new ReporteMovimientoAdapter(this,listaReporteMovimientos);
+                listaViewMovimiento.setAdapter(reporteMovimientoAdapter);
+            }
         }
     }
 }
