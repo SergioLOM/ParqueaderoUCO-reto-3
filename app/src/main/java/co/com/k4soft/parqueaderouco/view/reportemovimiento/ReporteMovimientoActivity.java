@@ -80,8 +80,12 @@ public class ReporteMovimientoActivity extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                String fecha = year + "-" + (month + 1) + "-" + dayOfMonth;
-                Date fechaMod = DateUtil.convertStringToDateNotHour(fecha);
+                int horas = calendar.get(Calendar.HOUR);
+                int minutos = calendar.get(Calendar.MINUTE);
+                int segundos = calendar.get(Calendar.SECOND);
+                String hora = horas + ":" + minutos + ":" +segundos;
+                String fecha = year + "-" + (month + 1) + "-" + dayOfMonth + " " + hora;
+                Date fechaMod = DateUtil.convertStringToDate(fecha);
                 txtFechaFinal.setText(DateUtil.convertDateToString(fechaMod));
             }
         }, anioFinal , mesFinal, diaFinal);
