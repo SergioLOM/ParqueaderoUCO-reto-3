@@ -80,7 +80,7 @@ public class ReporteMovimientoActivity extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                int horas = calendar.get(Calendar.HOUR);
+                int horas = calendar.get(Calendar.HOUR_OF_DAY);
                 int minutos = calendar.get(Calendar.MINUTE);
                 int segundos = calendar.get(Calendar.SECOND);
                 String hora = horas + ":" + minutos + ":" +segundos;
