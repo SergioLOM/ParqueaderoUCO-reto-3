@@ -73,17 +73,26 @@ public class ReporteMovimientoActivity extends AppCompatActivity {
 
     public void elegirFechaFinal(View view) {
         calendar = Calendar.getInstance();
-        int diaFinal = calendar.get(Calendar.DAY_OF_MONTH);
+        final int diaFinal = calendar.get(Calendar.DAY_OF_MONTH);
         int mesFinal = calendar.get(Calendar.MONTH);
         int anioFinal = calendar.get(Calendar.YEAR);
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                int horas = calendar.get(Calendar.HOUR_OF_DAY);
-                int minutos = calendar.get(Calendar.MINUTE);
-                int segundos = calendar.get(Calendar.SECOND);
-                String hora = horas + ":" + minutos + ":" +segundos;
+                int horas;
+                int minutos;
+                int segundos;
+                if (dayOfMonth == diaFinal){
+                    horas = calendar.get(Calendar.HOUR_OF_DAY);
+                    minutos = calendar.get(Calendar.MINUTE);
+                    segundos = calendar.get(Calendar.SECOND);
+                }else{
+                    horas = 23;
+                    minutos = 59;
+                    segundos = 59;
+                }
+                String hora = horas + ":" + minutos + ":" + segundos;
                 String fecha = year + "-" + (month + 1) + "-" + dayOfMonth + " " + hora;
                 Date fechaMod = DateUtil.convertStringToDate(fecha);
                 txtFechaFinal.setText(DateUtil.convertDateToString(fechaMod));
